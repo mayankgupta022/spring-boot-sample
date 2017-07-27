@@ -15,10 +15,10 @@ public class ItemManager {
 
 	@Autowired
 	ItemRepo repo;
-	
+
 	public JpaRepository<Item, Integer> getRepo() {
 		return repo;
-	}	
+	}
 
 	public Item findById(Integer id) {
 		return getRepo().findOne(id);
@@ -28,17 +28,25 @@ public class ItemManager {
 		return getRepo().save(entity);
 	}
 
-	public Item update(Item entity) {
-		return getRepo().save(entity);
+	public Item update(Integer id, Item entity) {
+		if (repo.exists(id)) {
+			entity.setId(id);
+			return getRepo().save(entity);
+		}
+		return null;
 	}
 
 	public List<Item> findAll() {
 		return getRepo().findAll();
 	}
 
-	public Item destroy(Item entity) {
-		entity.setStatus(Item.Status.INACTIVE);
-		return getRepo().save(entity);
+	public Item destroy(Integer id) {
+		Item entity = findById(id);
+		if (entity != null) {
+			entity.setStatus(Item.Status.INACTIVE);
+			return getRepo().save(entity);
+		}
+		return null;
 	}
 
 	/**

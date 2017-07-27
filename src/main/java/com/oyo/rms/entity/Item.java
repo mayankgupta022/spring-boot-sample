@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 @Entity
 @Table(name = "items")
@@ -22,19 +23,29 @@ public class Item {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Getter @Setter Integer id;
+	@Getter
+	@Setter
+	Integer id;
 
 	@NotNull
-	@Getter @Setter private String name;
+	@Getter
+	@Setter
+	private String name;
 
 	@NotNull
-	@Getter @Setter private Status status = Status.ACTIVE;
+	@Getter
+	@Setter
+	private Status status = Status.ACTIVE;
 
 	@NotNull
-	@Getter @Setter private LocalDateTime createdAt;
+	@Getter
+	@Setter
+	private LocalDateTime createdAt;
 
 	@NotNull
-	@Getter @Setter private LocalDateTime updatedAt;
+	@Getter
+	@Setter
+	private LocalDateTime updatedAt;
 
 	@PrePersist
 	protected void onCreate() {
