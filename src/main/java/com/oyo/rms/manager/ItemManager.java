@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Component;
 
 import com.oyo.rms.entity.Item;
 import com.oyo.rms.entity.Item.Status;
 import com.oyo.rms.repo.ItemRepo;
 
+@Component
 public class ItemManager {
 
 	@Autowired
