@@ -2,6 +2,7 @@ package com.oyo.rms.entity;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,19 +23,29 @@ public class Item {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Getter
+	@Setter
 	Integer id;
 
 	@NotNull
-	@Getter @Setter private String name;
+	@Getter
+	@Setter
+	private String name;
 
 	@NotNull
-	@Getter @Setter private Status status = Status.ACTIVE;
+	@Getter
+	@Setter
+	private Status status = Status.ACTIVE;
 
-	@NotNull
-	@Getter @Setter private LocalDateTime createdAt;
+	@Getter
+	@Setter
+	@Column(nullable = false, updatable = false)
+	private LocalDateTime createdAt;
 
-	@NotNull
-	@Getter @Setter private LocalDateTime updatedAt;
+	@Getter
+	@Setter
+	@Column(nullable = false)
+	private LocalDateTime updatedAt;
 
 	@PrePersist
 	protected void onCreate() {
