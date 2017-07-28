@@ -2,6 +2,7 @@ package com.oyo.rms.entity;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +15,6 @@ import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.Accessors;
 
 @Entity
 @Table(name = "items")
@@ -37,14 +37,14 @@ public class Item {
 	@Setter
 	private Status status = Status.ACTIVE;
 
-	@NotNull
 	@Getter
 	@Setter
+	@Column(nullable = false, updatable = false)
 	private LocalDateTime createdAt;
 
-	@NotNull
 	@Getter
 	@Setter
+	@Column(nullable = false)
 	private LocalDateTime updatedAt;
 
 	@PrePersist
