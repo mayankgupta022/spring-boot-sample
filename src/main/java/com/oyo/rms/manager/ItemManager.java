@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.oyo.rms.entity.Item;
 import com.oyo.rms.entity.Item.Status;
+import com.oyo.rms.exception.NotFoundException;
 import com.oyo.rms.repo.ItemRepo;
 
 @Component
@@ -21,7 +22,14 @@ public class ItemManager {
 	}
 
 	public Item findById(Integer id) {
-		return getRepo().findOne(id);
+		Item item = getRepo().findOne(id);
+		if (item != null) {
+			return item;
+		}
+		// Ideally manager shouldn't directly throw a runtime exception. It
+		// should rather throw a specific exception or return null and
+		// service/controller should handle that
+		throw new NotFoundException("Item not found for id: " + id);
 	}
 
 	public Item create(Item entity) {
@@ -33,7 +41,7 @@ public class ItemManager {
 			entity.setId(id);
 			return getRepo().save(entity);
 		}
-		return null;
+		throw new NotFoundException("Item not found for id: " + id);
 	}
 
 	public List<Item> findAll() {
@@ -46,7 +54,7 @@ public class ItemManager {
 			entity.setStatus(Item.Status.INACTIVE);
 			return getRepo().save(entity);
 		}
-		return null;
+		throw new NotFoundException("Item not found for id: " + id);
 	}
 
 	/**

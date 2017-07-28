@@ -46,9 +46,9 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
-	public Item update(@PathVariable("id") Integer id, @RequestBody ItemRequest request) {
+	public ItemResponse update(@PathVariable("id") Integer id, @RequestBody ItemRequest request) {
 		Item item = requestToEntity(request);
-		return manager.update(id, item);
+		return entityToResponse(manager.update(id, item));
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
